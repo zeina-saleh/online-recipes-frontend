@@ -6,7 +6,7 @@ import { sendRequest } from "../../config/request";
 import { useState } from "react";
 
 const LoginForm = ({ onToggle }) => {
-  
+
   const navigation = useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -15,15 +15,19 @@ const LoginForm = ({ onToggle }) => {
   });
 
   const [error, setError] = useState(null);
-  
+
   const loginHandler = async () => {
     try {
-      const response = await sendRequest({ method: "POST", route: "/login", body: credentials,
+      const response = await sendRequest({
+        method: "POST", route: "/login", body: credentials,
       });
+      if (response.token) {
+        localStorage.setItem("access_token", response.token);
+        navigation("/landing");
+      } else{
+        setError(response.message);
+      }
 
-      localStorage.setItem("access_token", response.token);
-
-      navigation("/landing");
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -38,7 +42,7 @@ const LoginForm = ({ onToggle }) => {
         label={"Email"}
         placeholder={"Type your email here..."}
         onChange={(email) =>
-          setCredentials({...credentials, email})
+          setCredentials({ ...credentials, email })
         }
       />
       <div className="spacer-15"></div>
@@ -47,7 +51,7 @@ const LoginForm = ({ onToggle }) => {
         placeholder={"Type your password here..."}
         type={"password"}
         onChange={(password) =>
-          setCredentials({...credentials, password})
+          setCredentials({ ...credentials, password })
         }
       />
       {error && <p>{error}</p>}
