@@ -1,13 +1,10 @@
 import React from "react";
 import "./style.css";
 import { useState } from "react";
-import Modal from "react-modal"
 
-const Nav = () => {
+const Nav = ({handleOpenModal}) => {
 
-    const [openModal, setOpenModal] = useState(false)
-    const handleOpenModal = () => setOpenModal(true)
-    const handleCloseModal = () => setOpenModal(false)
+    
 
     return (
         <>
@@ -20,10 +17,6 @@ const Nav = () => {
                 <li className="navbar-item">Logout</li>
             </ul>
         </nav>
-        <Modal isOpen={openModal}
-        className="modal">
-
-        </Modal>
         </>
     );
 };

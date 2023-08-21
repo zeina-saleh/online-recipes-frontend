@@ -3,6 +3,7 @@ import Input from '../../Input';
 import { sendRequest } from '../../../config/request';
 import './style.css';
 import { useParams } from 'react-router-dom';
+import Nav from '../../Nav';
 
 const RecipeDetails = () => {
   const { recipe_id } = useParams();
@@ -36,7 +37,13 @@ const RecipeDetails = () => {
     
   }
 
+  const [openModal, setOpenModal] = useState(false)
+  const handleOpenModal = () => setOpenModal(true)
+  const handleCloseModal = () => setOpenModal(false)
+
   return (
+    <>
+    <Nav handleOpenModal={handleOpenModal}/>
     <div className="details">
       <div className="recipe-images">
         {details.images &&
@@ -83,6 +90,7 @@ const RecipeDetails = () => {
         <Input  value={comment} onChange={(newComment) => setComment(newComment)}  placeholder={'Comment here'}/>
       </div>
     </div>
+    </>
   );
 };
 
