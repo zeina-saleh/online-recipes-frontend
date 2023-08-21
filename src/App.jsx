@@ -5,16 +5,19 @@ import './styles/utilities2.css'
 import Authentication from './components/pages/Authentication';
 import Landing from './components/pages/Landing';
 import RecipeDetails from './components/pages/RecipeDetails';
+import Nav from './components/Nav';
+import RecipeLayout from './components/pages/RecipeLayout';
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route index element={<Authentication />} />
-      <Route path='/landing' element={<Landing />} />
-      <Route path='/landing/:recipe_id' element={<RecipeDetails />} />
+      <Routes>
+        <Route index element={<Authentication />} />
+        <Route path='/landing' element={<Landing />} />
+        <Route path='/landing/:recipe_id' element={<RecipeDetails />} />
+
       </Routes>
-      </BrowserRouter>
+    </BrowserRouter>
   );
 }
 
