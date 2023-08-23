@@ -4,12 +4,16 @@ import { sendRequest } from '../../../config/request';
 import './style.css';
 import { useParams } from 'react-router-dom';
 import Nav from '../../Nav';
+import Button from '../../Button';
 
 const RecipeDetails = () => {
   const { recipe_id } = useParams();
   const [details, setDetails] = useState([]);
   const [comment, setComment] = useState('');
   const [isLiked, setIsLiked] = useState(false);
+  const [isClicked, setIsClicked] = useState(true);
+  const [selectedDate, setSelectedDate] = useState();
+  const [showSelect, setShowSelect] = useState(false)
 
   const fetchDetails = async () => {
     try {
@@ -40,6 +44,25 @@ const RecipeDetails = () => {
   const [openModal, setOpenModal] = useState(false)
   const handleOpenModal = () => setOpenModal(true)
   const handleCloseModal = () => setOpenModal(false)
+
+  async function handleScheduleChange (event) {
+    setSelectedDate(event.target.value)
+  }
+
+  async function submitSchedule(){
+    try {
+      const response = await sendRequest({method: "POST", route: `/addDate/${recipe_id}`, body: {date: selectedDate} });
+      console.log(response);
+    setIsClicked(true)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+ 
+  function switchButtons(){
+    setIsClicked(false)
+    setShowSelect(false)
+  }
 
   return (
     <>
@@ -87,8 +110,18 @@ const RecipeDetails = () => {
       </div>
       <div className='comment-input'>
         <i className={`fa-solid fa-thumbs-up fa-2xl like-icon ${isLiked ? 'like' : 'unliked'}`} onClick={likeRecipe}></i>        
-        <Input  value={comment} onChange={(newComment) => setComment(newComment)}  placeholder={'Comment here'}/>
+        <Input value={comment} onChange={(newComment) => setComment(newComment)}  placeholder={'Comment here'}/>
       </div>
+      {isClicked ? (
+        <Button color='primary-bg' textColor='white-text' text='Schedule Recipe' onClick={() => setShowSelect(true)} /> 
+      ) : (
+        <><Button color='primary-bg' textColor='white-text' text='Add Schedule' onClick={submitSchedule} /> </>
+      )}
+      {showSelect ? (
+        <input type='datetime-local' onChange={handleScheduleChange} onBlur={switchButtons}/> 
+      ) : (
+        <> </>
+      )}
     </div>
     </>
   );
