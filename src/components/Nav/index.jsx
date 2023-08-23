@@ -1,10 +1,7 @@
 import React from "react";
 import "./style.css";
-import { useState } from "react";
 
-const Nav = ({handleOpenModal}) => {
-
-    
+const Nav = ({handleOpenModal, handleOpenCalendarModal}) => {
 
     return (
         <>
@@ -13,7 +10,7 @@ const Nav = ({handleOpenModal}) => {
             <ul className="navbar-list">
                 <li className="navbar-item" onClick={handleOpenModal}>Add Recipe</li>
                 <li className="navbar-item">Shopping List</li>
-                <li className="navbar-item">Calendar</li>
+                <li className="navbar-item" onClick={handleOpenCalendarModal}>Calendar</li>
                 <li className="navbar-item">Logout</li>
             </ul>
         </nav>
