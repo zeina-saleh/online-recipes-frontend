@@ -6,12 +6,15 @@ import "./style.css";
 import Nav from '../../Nav';
 import Modal from "react-modal";
 import ModalForm from '../../ModalForm';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 
 const Landing = () => {
   const [recipes, setRecipes] = useState([]);
+  const [events, setEvents] = useState([]);
+    const [mealName, setMealName] = useState('');
+    const [mealDate, setMealDate] = useState('');
 
   const fetchRecipes = async () => {
     try {
@@ -23,11 +26,22 @@ const Landing = () => {
     }
   };
 
+  const fetchPlans = async () => {
+    try {
+      const response = await sendRequest({ route: "/getDate", body: "" });
+      console.log(response);
+      const schedule = response.schedule;
+            setEvents(schedule);
+            console.log(events)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchRecipes();
+    fetchPlans();
   }, []);
-
-  // Modal.setAppElement(<Landing/>);
 
   const [openModal, setOpenModal] = useState(false)
   const handleOpenModal = () => setOpenModal(true)
@@ -52,9 +66,13 @@ const Landing = () => {
         <ModalForm handleCloseModal={handleCloseModal}/>
       </Modal>
       <Modal isOpen={openCalendarModal}
-        onRequestClose={handleCloseCalendarModal}
-        className="calendar">
-        <Calendar handleCloseModal={handleCloseCalendarModal}/>
+        onRequestClose={handleCloseCalendarModal}>
+           <FullCalendar
+                plugins={[dayGridPlugin]}
+                initialView="dayGridMonth"
+                weekends={true}
+                events={events}
+            />
       </Modal>
     </div>
   );
