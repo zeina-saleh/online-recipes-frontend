@@ -13,8 +13,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 const Landing = () => {
   const [recipes, setRecipes] = useState([]);
   const [events, setEvents] = useState([]);
-    const [mealName, setMealName] = useState('');
-    const [mealDate, setMealDate] = useState('');
 
   const fetchRecipes = async () => {
     try {
@@ -53,7 +51,7 @@ const Landing = () => {
 
   return (
     <div>
-      <Nav handleOpenModal={handleOpenModal} handleOpenCalendarModal={handleOpenCalendarModal}/>
+      <Nav handleOpenModal={handleOpenModal} handleOpenCalendarModal={handleOpenCalendarModal} />
       <div className="recipe-list">
         {recipes.map(recipe => (
           <Link key={recipe.id} to={`/landing/${recipe.id}`}>

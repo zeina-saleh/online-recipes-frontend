@@ -1,10 +1,87 @@
+.modal-form-container {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-container label {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.form-container input[type="file"],
+.form-container input[type="text"],
+.form-container textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.form-container textarea.review-text {
+  width: 90%;
+  height: 150px;
+  resize: vertical;
+}
+
+.form-container textarea:focus,
+.form-container input:focus {
+  border-color: #3498db;
+}
+
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+
+.primary-bg {
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.primary-bg:hover {
+  background-color: #333;
+}
+
+
+.input-field {
+  width: 50%;
+  height: 80px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: #3498db;
+}
+
+
+@media (max-width: 768px) {
+  .modal-form-container {
+      max-width: 100%;
   }
-  
-  .buttons-container{
-    display: flex;
-    justify-content: center;
-  }
+}

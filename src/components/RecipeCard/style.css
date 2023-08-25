@@ -1,16 +1,75 @@
-   .recipe-card img {
-    max-width: 100%;
-    height: auto;
-  }
+/* Styling for the recipe card container */
+.recipe-card {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+/* Styling for the recipe image */
+.recipe-image {
+  flex: 1;
+  max-width: 200px;
+  overflow: hidden;
+}
+
+.recipe-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Styling for the recipe details */
+.recipe-details {
+  flex: 2;
+  padding: 15px;
+}
+
+.recipe-title {
+  font-size: 24px;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.recipe-description {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.recipe-cuisine {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.recipe-likes {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #888;
+}
+
+.recipe-likes i {
+  margin-right: 5px;
+  color: #ff6b6b; /* Heart color */
+}
+
+.recipe-likes span {
+  margin-left: 2px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
   .recipe-card {
-    background-color: #f8f8f8;
-    border: 1px solid #e0e0e0;
-    padding: 20px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+      flex-direction: column;
   }
-  
-  .recipe-card:hover {
-    transform: translateY(-5px);
+  .recipe-image {
+      max-width: 100%;
   }
+}

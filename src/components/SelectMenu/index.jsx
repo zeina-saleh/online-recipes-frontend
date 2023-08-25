@@ -2,13 +2,13 @@ import React from 'react'
 import Select from 'react-select'
 import { useState } from 'react';
 
-const SelectMenu = ({options}) => {
+const SelectMenu = ({isMulti, options}) => {
 
       const [selectedOption, setSelectedOption] = useState(null);
   return (
     <div>
         <Select 
-        isMulti={true} 
+        isMulti={isMulti} 
         isSearchable={true} 
         placeholder={'select from menu'}
         defaultValue={selectedOption}
