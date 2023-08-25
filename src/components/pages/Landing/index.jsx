@@ -29,8 +29,8 @@ const Landing = () => {
       const response = await sendRequest({ route: "/getDate", body: "" });
       console.log(response);
       const schedule = response.schedule;
-            setEvents(schedule);
-            console.log(events)
+      setEvents(schedule);
+      console.log(events)
     } catch (error) {
       console.log(error);
     }
@@ -53,24 +53,28 @@ const Landing = () => {
     <div>
       <Nav handleOpenModal={handleOpenModal} handleOpenCalendarModal={handleOpenCalendarModal} />
       <div className="recipe-list">
-        {recipes.map(recipe => (
-          <Link key={recipe.id} to={`/landing/${recipe.id}`}>
-            <RecipeCard recipe={recipe} />
-          </Link>
-        ))}
+        <div className='container'>
+          <div className="content">
+            {recipes.map(recipe => (
+              <Link key={recipe.id} to={`/landing/${recipe.id}`}>
+                <RecipeCard recipe={recipe} />
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
       <Modal isOpen={openModal}
         onRequestClose={handleCloseModal}>
-        <ModalForm handleCloseModal={handleCloseModal}/>
+        <ModalForm handleCloseModal={handleCloseModal} />
       </Modal>
       <Modal isOpen={openCalendarModal}
         onRequestClose={handleCloseCalendarModal}>
-           <FullCalendar
-                plugins={[dayGridPlugin]}
-                initialView="dayGridMonth"
-                weekends={true}
-                events={events}
-            />
+        <FullCalendar
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
+          weekends={true}
+          events={events}
+        />
       </Modal>
     </div>
   );
